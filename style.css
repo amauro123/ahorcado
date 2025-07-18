@@ -1,0 +1,269 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hangman-drawing {
+    width: 150px;
+    height: 200px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    /* Para ocultar partes del ahorcado al inicio */
+}
+
+/* Estilos para las partes del ahorcado (inicialmente ocultas) */
+.gallows {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: 5px;
+    height: 180px;
+    background-color: #666;
+    transform-origin: bottom;
+}
+
+.gallows::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 5px;
+    background-color: #666;
+}
+
+.gallows::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 25px;
+    background-color: #666;
+    transform: translateX(95px);
+    /* Posicionar el nudo */
+}
+
+.head,
+.body,
+.arm,
+.leg {
+    background-color: #333;
+    position: absolute;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    /* Ocultar inicialmente */
+}
+
+.head {
+    width: 40px;
+    height: 40px;
+    top: 30px;
+    left: calc(50% + 25px);
+    /* Ajustar posición para el ahorcado */
+    transform: translateX(-50%);
+}
+
+.body {
+    width: 5px;
+    height: 60px;
+    top: 70px;
+    left: calc(50% + 25px);
+    transform: translateX(-50%);
+    border-radius: 0;
+}
+
+.arm {
+    width: 5px;
+    height: 40px;
+    border-radius: 0;
+    transform-origin: top;
+}
+
+.left-arm {
+    top: 75px;
+    left: calc(50% + 25px - 20px);
+    transform: rotate(45deg);
+}
+
+.right-arm {
+    top: 75px;
+    left: calc(50% + 25px + 15px);
+    transform: rotate(-45deg);
+}
+
+.leg {
+    width: 5px;
+    height: 50px;
+    border-radius: 0;
+    transform-origin: top;
+}
+
+.left-leg {
+    top: 130px;
+    left: calc(50% + 25px - 10px);
+    transform: rotate(15deg);
+}
+
+.right-leg {
+    top: 130px;
+    left: calc(50% + 25px + 5px);
+    transform: rotate(-15deg);
+}
+
+/* Clases para mostrar las partes del ahorcado */
+.show-head .head,
+.show-body .body,
+.show-left-arm .left-arm,
+.show-right-arm .right-arm,
+.show-left-leg .left-leg,
+.show-right-leg .right-leg {
+    opacity: 1;
+}
+
+
+.word-display {
+    margin: 20px 0;
+    font-size: 2em;
+    letter-spacing: 5px;
+    font-weight: bold;
+    color: #555;
+    min-height: 1.5em;
+    /* Para mantener el espacio */
+}
+
+.guesses {
+    margin-bottom: 20px;
+    color: #777;
+}
+
+.guesses span {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#letter-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 60px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#guess-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#guess-button:hover {
+    background-color: #218838;
+}
+
+.message {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #d35400;
+}
+
+.message.win {
+    color: #27ae60;
+}
+
+.message.lose {
+    color: #c0392b;
+}
+
+#reset-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+#reset-button:hover {
+    background-color: #0056b3;
+}
+
+/* Nuevos estilos para la pista */
+.hint-area {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#hint-button {
+    background-color: #ffc107;
+    color: #333;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+#hint-button:hover {
+    background-color: #e0a800;
+}
+
+#hint-output {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    padding: 10px;
+    border-radius: 4px;
+    color: #856404;
+    font-style: italic;
+    font-size: 0.95em;
+    margin-top: 10px;
+}
+
+
+.hidden {
+    display: none;
+}

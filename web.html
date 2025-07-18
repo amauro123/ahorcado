@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Juego del Ahorcado con Pista - SENA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>El Ahorcado SENA</h1>
+        <div class="game-area">
+            <div class="hangman-drawing">
+                <div class="gallows"></div>
+                <div class="head"></div>
+                <div class="body"></div>
+                <div class="arm left-arm"></div>
+                <div class="arm right-arm"></div>
+                <div class="leg left-leg"></div>
+                <div class="leg right-leg"></div>
+            </div>
+            <div class="word-display">
+                <p id="word-output"></p>
+            </div>
+            <div class="guesses">
+                <p>Letras usadas: <span id="used-letters"></span></p>
+            </div>
+            <div class="input-area">
+                <input type="text" id="letter-input" maxlength="1" placeholder="Ingresa una letra">
+                <button id="guess-button">Adivinar</button>
+            </div>
+            <div class="hint-area">
+                <button id="hint-button">Pedir Pista</button>
+                <p id="hint-output" class="hidden"></p>
+            </div>
+            <p id="message" class="message"></p>
+            <button id="reset-button" class="hidden">Jugar de Nuevo</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
